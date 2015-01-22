@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ ! -d $OPENSHIFT_DATA_DIR/config ]; then
+  mkdir $OPENSHIFT_DATA_DIR/config
+fi
+if [ ! -d $OPENSHIFT_DATA_DIR/cache ]; then
+  mkdir $OPENSHIFT_DATA_DIR/cache
+fi
+if [ ! -d $OPENSHIFT_DATA_DIR/uploads ]; then
+  mkdir $OPENSHIFT_DATA_DIR/uploads
+fi
+
+ln -sf ${OPENSHIFT_DATA_DIR}config ${OPENSHIFT_REPO_DIR}config
+ln -sf ${OPENSHIFT_DATA_DIR}cache ${OPENSHIFT_REPO_DIR}cache
+ln -sf ${OPENSHIFT_DATA_DIR}uploads ${OPENSHIFT_REPO_DIR}uploads
