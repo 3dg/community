@@ -1,0 +1,3 @@
+[submodule "addons/plugins/Views"]
+	path = addons/plugins/Views
+	url = https://github.com/esotalk/Views.git
