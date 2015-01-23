@@ -298,6 +298,19 @@ $definitions["optional"] = "可选";
 $definitions["Order By:"] = "排序:";
 $definitions["Original Post"] = "原文";
 
+$definitions["month.1"] = "一月";
+$definitions["month.2"] = "二月";
+$definitions["month.3"] = "三月";
+$definitions["month.4"] = "四月";
+$definitions["month.5"] = "五月";
+$definitions["month.6"] = "六月";
+$definitions["month.7"] = "七月";
+$definitions["month.8"] = "八月";
+$definitions["month.9"] = "九月";
+$definitions["month.10"] = "十月";
+$definitions["month.11"] = "十一月";
+$definitions["month.12"] = "十二月";
+
 $definitions["Page Not Found"] = "找不到该页面了";
 $definitions["Password"] = "密码";
 $definitions["PHP version"] = "PHP版本";

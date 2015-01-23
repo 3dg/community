@@ -298,6 +298,19 @@ $definitions["optional"] = "optional";
 $definitions["Order By:"] = "Order By:";
 $definitions["Original Post"] = "Original Post";
 
+$definitions["month.1"] = "January";
+$definitions["month.2"] = "February";
+$definitions["month.3"] = "March";
+$definitions["month.4"] = "April";
+$definitions["month.5"] = "May";
+$definitions["month.6"] = "June";
+$definitions["month.7"] = "July";
+$definitions["month.8"] = "August";
+$definitions["month.9"] = "September";
+$definitions["month.10"] = "October";
+$definitions["month.11"] = "November";
+$definitions["month.12"] = "December";
+
 $definitions["Page Not Found"] = "Page Not Found";
 $definitions["Password"] = "Password";
 $definitions["PHP version"] = "PHP version";
