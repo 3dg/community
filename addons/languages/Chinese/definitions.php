@@ -305,7 +305,7 @@ $definitions["Plugins"] = "插件";
 $definitions["Post a Reply"] = "发表回复";
 $definitions["Post count"] = "发布统计";
 $definitions["Posts"] = "发言";
-$definitions["Powered by"] = "RKIDC.NET";
+$definitions["Powered by"] = "Powered by";
 $definitions["Preview"] = "预览";
 $definitions["Previous"] = "前一个";
 
