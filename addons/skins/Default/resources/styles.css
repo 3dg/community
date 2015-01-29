@@ -99,7 +99,7 @@ p, ul, pre {line-height:1.6em}
 #ftr {font-size:90%}
 #ftr-content {padding-top:20px; padding-bottom:20px}
 #ftr li {margin-right:10px}
-#ftr .item-copyright {float:right; margin:0}
+#ftr .item-copyright {float:right; margin:0; margin-top: -16px;}
 
 
 /* Text inputs */
