@@ -1084,6 +1084,7 @@ public function action_reply($conversationId = false)
 
 	// Set up a form to handle the input.
 	$form = ETFactory::make("form");
+	$this->trigger("reply", array($form));
 
 	// Save a draft.
 	if ($form->validPostBack("saveDraft")) {
@@ -1101,7 +1102,7 @@ public function action_reply($conversationId = false)
 	}
 
 	// Add a reply.
-	else {
+	elseif (!$form->errorCount()) {
 
 		// Fetch the members allowed so that notifications can be sent out in the addReply method if this is
 		// the first post.
