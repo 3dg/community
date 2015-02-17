@@ -400,8 +400,10 @@ public function action_start($member = false)
 
 	}
 
+	$this->trigger("start", array($form));
+
 	// If the form was submitted (validate the presence of the content field)...
-	if ($form->validPostBack("content")) {
+	if ($form->validPostBack("content") && !$form->errorCount()) {
 
 		$model = ET::conversationModel();
 
