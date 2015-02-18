@@ -29,6 +29,7 @@ class ETPlugin_Captcha extends ETPlugin {
 
   public function handler_userController_initJoin($sender, $form)
   {
+    if ($this->skipCaptcha()) return;
     $form->addSection('captcha', '验证码');
     $form->addField('captcha', 'captcha', function($form) use ($sender)
     {
@@ -45,12 +46,14 @@ class ETPlugin_Captcha extends ETPlugin {
 
   public function handler_conversationController_renderFormButtonsAfter($sender, &$content, $form, $conversation)
   {
+    if ($this->skipCaptcha()) return;
     $result = $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form, 'tabindex' => 290));
     addToArray($content, $result, 0);
   }
 
   public function handler_conversationController_reply($sender, $form)
   {
+    if ($this->skipCaptcha()) return;
     $form->addField('captcha', 'captcha', null,
     function($form, $key, &$data) use ($sender)
     {
@@ -61,6 +64,7 @@ class ETPlugin_Captcha extends ETPlugin {
   }
   public function handler_conversationController_start($sender, $form)
   {
+    if ($this->skipCaptcha()) return;
     $form->addField('captcha', 'captcha', null,
     function($form, $key, &$data) use ($sender)
     {
@@ -68,6 +72,15 @@ class ETPlugin_Captcha extends ETPlugin {
         $form->error($key, '验证码错误');
       }
     });
+  }
+
+
+  private function skipCaptcha()
+  {
+    if (ET::$session->user && ET::$session->user['countPosts'] >= 10) {
+      return true;
+    }
+    return false;
   }
 
 
