@@ -1,0 +1,20 @@
+.sheet .buttons .captcha {
+  float: right;
+  margin-left: 10px;
+}
+.captcha img {
+  width: 102px;
+  height: 34px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.captcha img.loading {
+  cursor: wait;
+}
+.captcha input {
+  padding: 7px;
+  width: 72px;
+}
+.fieldGroup .captcha input {
+  width: 154px;
+}

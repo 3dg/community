@@ -25,6 +25,8 @@ addons/libraries/*
 !addons/skins/Default
 !addons/skins/index.html
 
+!addons/plugins/Captcha
+
 # Compiled source
 *.com
 *.class
