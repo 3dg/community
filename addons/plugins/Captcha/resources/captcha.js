@@ -40,6 +40,9 @@ function reload($img) {
   .one('load error', function () {
     $img.removeClass('loading')
   })
+  // remove attr to show loading image
+  .removeAttr('src')
+  .removeAttr('srcset')
   .attr('src', '/captcha?t=' + t)
   .attr('srcset', '/captcha/2x?t=' + t + ' 2x')
 }
