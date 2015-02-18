@@ -32,7 +32,7 @@ class ETPlugin_Captcha extends ETPlugin {
     $form->addSection('captcha', '验证码');
     $form->addField('captcha', 'captcha', function($form) use ($sender)
     {
-      return $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form));
+      return $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form, 'tips' => true));
     },
     function($form, $key, &$data) use ($sender)
     {
@@ -42,20 +42,33 @@ class ETPlugin_Captcha extends ETPlugin {
     });
   }
 
-  // public function handler_userController_renderJoinButtonsAfter($sender)
-  // {
-  //   echo $sender->getViewContents($this->view('captcha/captcha'));
-  // }
 
-  // public function handler_conversationController_renderEditBox($sender, &$formatted, $post)
-  // {
-  //   addToArray($formatted['footer'], 'hehehehe', 0);
-  // }
+  public function handler_conversationController_renderFormButtonsAfter($sender, &$content, $form, $conversation)
+  {
+    $result = $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form));
+    addToArray($content, $result, 0);
+  }
 
-  // public function handler_conversationController_renderReplyBox($sender, &$formatted, $post)
-  // {
-  //   addToArray($formatted['footer'], 'hehehehe', 0);
-  // }
+  public function handler_conversationController_reply($sender, $form)
+  {
+    $form->addField('captcha', 'captcha', null,
+    function($form, $key, &$data) use ($sender)
+    {
+      if ( !self::verifyCode($form->getValue($key)) ) {
+        $form->error($key, '验证码错误');
+      }
+    });
+  }
+  public function handler_conversationController_start($sender, $form)
+  {
+    $form->addField('captcha', 'captcha', null,
+    function($form, $key, &$data) use ($sender)
+    {
+      if ( !self::verifyCode($form->getValue($key)) ) {
+        $form->error($key, '验证码错误');
+      }
+    });
+  }
 
 
   public static function verifyCode($code = '') {
