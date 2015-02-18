@@ -403,7 +403,12 @@ public function action_start($member = false)
 	$this->trigger("start", array($form));
 
 	// If the form was submitted (validate the presence of the content field)...
-	if ($form->validPostBack("content") && !$form->errorCount()) {
+	if ($form->validPostBack("content") &&
+		($form->runFieldCallbacks() || $form->errorCount())
+	) {
+		$this->messages($form->errors, "warning");
+	}
+	elseif ($form->validPostBack("content")) {
 
 		$model = ET::conversationModel();
 
@@ -1103,8 +1108,12 @@ public function action_reply($conversationId = false)
 
 	}
 
+	elseif ($form->runFieldCallbacks() || $form->errorCount()) {
+		$this->messages($form->errors, "warning");
+	}
+
 	// Add a reply.
-	elseif (!$form->errorCount()) {
+	else {
 
 		// Fetch the members allowed so that notifications can be sent out in the addReply method if this is
 		// the first post.
