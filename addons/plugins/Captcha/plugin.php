@@ -45,7 +45,7 @@ class ETPlugin_Captcha extends ETPlugin {
 
   public function handler_conversationController_renderFormButtonsAfter($sender, &$content, $form, $conversation)
   {
-    $result = $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form));
+    $result = $sender->getViewContents($this->view('captcha/captcha'), array('form' => $form, 'tabindex' => 290));
     addToArray($content, $result, 0);
   }
 
