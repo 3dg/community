@@ -306,7 +306,10 @@ public function init()
 			$this->addToMenu("statistics", "statistic-online", $stat);
 		}
 
-		$this->addToMenu("meta", "copyright", "<a href='https://www.upyun.com/' target='_blank' rel='nofollow'><img src='http://upfiles.b0.upaiyun.com/logo/90x45.png' width='90' height='45' alt='UPYUN' style='vertical-align: middle;'></a> <a href='http://esotalk.org/' target='_blank'>".T("Powered by")." esoTalk</a>");
+		$this->addToMenu("meta", "copyright",
+			"<a href='https://www.upyun.com/' target='_blank' rel='nofollow'><img src='http://upfiles.b0.upaiyun.com/logo/90x45.png' width='90' height='45' alt='UPYUN' style='vertical-align: middle;'></a> ".
+			"<a href='https://github.com/3dg' target='_blank'>Source code on github</a>"
+		);
 
 		// Set up some default JavaScript files and language definitions.
 		$this->addJSFile("core/js/lib/jquery.js", true);
