@@ -373,6 +373,8 @@ public function saveAvatar($form, $key, &$preferences)
 
 		// Save it as an image, cropping it to the configured avatar size.
 		$avatar = $uploader->saveAsImage($file, PATH_UPLOADS."/avatars/".ET::$session->userId, C("esoTalk.avatars.width"), C("esoTalk.avatars.height"), "crop");
+		// retina support
+		$avatar = $uploader->saveAsImage($file, PATH_UPLOADS."/avatars/".ET::$session->userId."@2x", C("esoTalk.avatars.width")*2, C("esoTalk.avatars.height")*2, "crop");
 
 		// Update the member's avatarFormat field to the avatar file's extension.
 		ET::memberModel()->updateById(ET::$session->userId, array("avatarFormat" => pathinfo($avatar, PATHINFO_EXTENSION)));

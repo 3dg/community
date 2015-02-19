@@ -175,7 +175,17 @@ function avatar($member = array(), $className = "")
 	if (!empty($member["memberId"]) and !empty($member["avatarFormat"])) {
 		$file = "uploads/avatars/{$member["memberId"]}.{$member["avatarFormat"]}";
 		$url = getWebPath($file);
-		return "<img src='$url' alt='' class='avatar $className'/>";
+
+		// retina support
+		$file2x = "uploads/avatars/{$member["memberId"]}@2x.{$member["avatarFormat"]}";
+		$url2x = getWebPath($file2x);
+
+		if (isMobileBrowser()) {
+			// mobile avatar size is 20px, default 64px is enough
+			return "<img src='$url' alt='' class='avatar $className'/>";
+		} else {
+			return "<img src='$url' srcset='$url2x 2x' alt='' class='avatar $className'/>";
+		}
 	}
 
 	// Default to an avatar with the first letter of the member's name.
