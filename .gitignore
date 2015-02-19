@@ -26,6 +26,7 @@ addons/libraries/*
 !addons/skins/index.html
 
 !addons/plugins/Upyun
+!addons/plugins/Photoswipe
 
 # Compiled source
 *.com
