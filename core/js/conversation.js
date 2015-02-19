@@ -613,13 +613,13 @@ redisplayAvatars: function() {
 	// If they're the same, hide it.
 	var prevId = null;
 	$("#conversationPosts > li").each(function() {
-		if (prevId == $(this).find("div.post").data("memberid"))
-			$(this).find("div.avatar").hide();
+		var $post = $(this).find(".post:first")
+		var id = $post.data("memberid")
+		if (prevId == id)
+			$post.addClass('post-hide-avatar');
 		else
-			$(this).find("div.avatar").show();
-
-		prevId = $(this).find("div.post").data("memberid");
-
+			$post.removeClass('post-hide-avatar');
+		prevId = id;
 	});
 
 },
