@@ -24,6 +24,7 @@ class ETPlugin_Upyun extends ETPlugin {
   public function handler_conversationController_renderBefore($sender)
   {
     $sender->addJSFile($this->resource('upyun.js'));
+    $sender->addCssFile($this->resource('upyun.css'));
   }
 
 

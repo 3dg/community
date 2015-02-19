@@ -25,16 +25,30 @@ BBCode.image = function (id) {
 }
 
 // drag upload
-$(document).on('drop', '#reply', function(evt) {
+$(document)
+.on('drop', '#reply', function(evt) {
   evt.preventDefault()
   evt.stopPropagation()
 
+  $(this).trigger('change') // active textarea
+  $('> .postContent', this).removeClass('upyun-drag-highlight')
+  var $target = $('textarea', this)
   $.each(evt.originalEvent.dataTransfer.files, function(i, file) {
-    return upload(file, $('textarea', this))
+    return upload(file, $target)
   })
-}).on('dragenter dragover', '#reply', function(evt) {
+})
+.on('dragover', function(evt) {
   evt.preventDefault()
+  evt.originalEvent.dataTransfer.dropEffect = 'none'
+})
+.on('enter dragover', '#reply', function(evt) {
+  evt.preventDefault()
+  evt.stopPropagation()
   evt.originalEvent.dataTransfer.dropEffect = 'copy'
+  $('> .postContent', this).addClass('upyun-drag-highlight')
+})
+.on('dragleave', '#reply', function(evt) {
+  $('> .postContent', this).removeClass('upyun-drag-highlight')
 })
 
 // clipboard upload
@@ -42,11 +56,12 @@ $(document).on('paste', '#reply', function (evt) {
   var data = evt.originalEvent.clipboardData
   if (typeof data !== 'object') return
 
+  var $target = $('textarea', this)
   $.each(data.items, function(i, item) {
     if (item.kind === 'file') {
       var file = item.getAsFile()
       file.name = file.name || 'screenshot.png'
-      return upload(file, $('textarea', this))
+      return upload(file, $target)
     }
   })
 })
