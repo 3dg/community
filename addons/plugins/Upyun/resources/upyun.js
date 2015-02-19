@@ -101,8 +101,10 @@ function upload(file, $target) {
   ETConversation.wrapText($target, placeholder, '', '', '')
   deferred
   .done(function (res, bucket) {
-    result = '[url=//' + bucket + '.b0.upaiyun.com' + res.url + ']'
-      + '[img]//' + bucket + '.b0.upaiyun.com' + res.url + '!s[/img]'
+    result = '[url=http://' + bucket + '.b0.upaiyun.com' + res.url + ']'
+      // TODO thumb name setting
+      // TODO https?
+      + '[img]http://' + bucket + '.b0.upaiyun.com' + res.url + '!s[/img]'
       + '[i]' + res['image-width'] + 'x' + res['image-height'] + '[/i]'
       + '[/url]'
   })
