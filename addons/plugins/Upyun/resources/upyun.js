@@ -5,7 +5,7 @@ if ( typeof BBCode === 'undefined' || typeof FormData !== 'function' ) return
 function getSign() {
   return $.getJSON( '/upyun/signature' )
   .fail(function () {
-    ETMessages.showMessage('无法进行上传验证', 'error')
+    ETMessages.showMessage('无法进行上传验证', 'warning')
   })
 }
 
@@ -84,7 +84,7 @@ function upload(file, $target) {
       dataType: 'json'
     })
     .fail(function () {
-      ETMessages.showMessage('上传失败', 'error')
+      ETMessages.showMessage('上传失败', 'warning')
     })
     .then(function (res) {
       return $.Deferred().resolve(res, sign.bucket)
