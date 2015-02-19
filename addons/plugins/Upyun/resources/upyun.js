@@ -68,7 +68,7 @@ $(document).on('paste', '#reply', function (evt) {
 
 
 function upload(file, $target) {
-
+  // TODO queue upload
   var deferred = getSign()
   .then(function (sign) {
     var data = new FormData
@@ -81,10 +81,15 @@ function upload(file, $target) {
       type: 'POST',
       processData: false,
       contentType: false,
-      dataType: 'json'
+      dataType: 'json',
+      timeout: 1000 * 60 * 15 // 15 minutes
     })
-    .fail(function () {
-      ETMessages.showMessage('上传失败', 'warning')
+    .fail(function ($xhr, status, error) {
+      if (status === 'timeout') {
+        ETMessages.showMessage('上传超时', 'warning')
+      } else {
+        ETMessages.showMessage('上传失败', 'warning')
+      }
     })
     .then(function (res) {
       return $.Deferred().resolve(res, sign.bucket)
