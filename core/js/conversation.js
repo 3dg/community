@@ -502,7 +502,9 @@ update: function() {
 				// Create a dud "more" block and then add the new post to it.
 				var moreItem = $("<li></li>").appendTo("#conversationPosts");
 				ETScrubber.count = ETConversation.postCount;
-				ETScrubber.addItems(data.startFrom, data.view, moreItem, true);
+				var items = ETScrubber.addItems(data.startFrom, data.view, moreItem, true);
+				ETConversation.redisplayAvatars();
+				ETConversation.initPost(items);
 
 				var interval = ET.conversationUpdateIntervalStart;
 
