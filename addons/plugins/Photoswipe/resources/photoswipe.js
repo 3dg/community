@@ -40,9 +40,12 @@ var pswpTpl = '\
 '
 
 var _initPost = ETConversation.initPost
-ETConversation.initPost = function (post) {
+ETConversation.initPost = function ($posts) {
   _initPost.apply(this, arguments)
-  listen($(post))
+
+  $posts.each(function () {
+    listen($(this))
+  })
 }
 
 var _togglePreview = ETConversation.togglePreview
