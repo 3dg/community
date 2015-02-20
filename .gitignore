@@ -28,6 +28,7 @@ addons/libraries/*
 !addons/languages/Chinese
 !addons/plugins/Captcha
 !addons/plugins/Upyun
+!addons/plugins/Photoswipe
 
 # Compiled source
 *.com
