@@ -1,6 +1,6 @@
 void function () {
 
-if ( typeof BBCode === 'undefined' || typeof FormData !== 'function' ) return
+if ( typeof BBCode === 'undefined' || typeof FormData === 'undefined' ) return
 
 function getSign() {
   return $.getJSON( '/upyun/signature' )
@@ -86,6 +86,7 @@ function upload(file, $target) {
     })
     .fail(function ($xhr, status, error) {
       if (status === 'timeout') {
+        // TODO i18n
         ETMessages.showMessage('上传超时', 'warning')
       } else {
         ETMessages.showMessage('上传失败', 'warning')
@@ -99,7 +100,7 @@ function upload(file, $target) {
 
   // ==== insert content
 
-  var placeholder = '[img]Uploading ' + file.name + '…[/img]'
+  var placeholder = '[img]上传中 ' + file.name + '…[/img]'
 
   var pos = $target.getSelection()
   var result = ''
