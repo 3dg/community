@@ -457,6 +457,9 @@ a.deleteLink:hover {color:#f00 !important; text-decoration:line-through}
 .post div.avatar {float:left; margin-left:-79px}
 .postContent:before, .postContent:after {content:" "; border-top-color:transparent !important; border-bottom-color:transparent !important; border-left-color:transparent !important; border-style:solid; border-width:8px; height:0; width:0; left:-16px; top:12px; position:absolute}
 .postContent:after {float:left; left:-15px}
+.post-hide-avatar .postContent:before,
+.post-hide-avatar .postContent:after,
+.post-hide-avatar .avatar {display: none;}
 
 .highlight .postContent {box-shadow:0 0 0 4px #fe9}
 

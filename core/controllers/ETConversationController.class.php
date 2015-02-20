@@ -400,8 +400,15 @@ public function action_start($member = false)
 
 	}
 
+	$this->trigger("start", array($form));
+
 	// If the form was submitted (validate the presence of the content field)...
-	if ($form->validPostBack("content")) {
+	if ($form->validPostBack("content") &&
+		($form->runFieldCallbacks() || $form->errorCount())
+	) {
+		$this->messages($form->errors, "warning");
+	}
+	elseif ($form->validPostBack("content")) {
 
 		$model = ET::conversationModel();
 
@@ -1084,6 +1091,7 @@ public function action_reply($conversationId = false)
 
 	// Set up a form to handle the input.
 	$form = ETFactory::make("form");
+	$this->trigger("reply", array($form));
 
 	// Save a draft.
 	if ($form->validPostBack("saveDraft")) {
@@ -1098,6 +1106,10 @@ public function action_reply($conversationId = false)
 			return;
 		}
 
+	}
+
+	elseif ($form->runFieldCallbacks() || $form->errorCount()) {
+		$this->messages($form->errors, "warning");
 	}
 
 	// Add a reply.

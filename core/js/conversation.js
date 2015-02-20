@@ -263,7 +263,6 @@ initReply: function() {
 				// Scroll to the bottom of the reply area.
 				$.scrollTo("#reply", "slow");
 			}
-			e.stopPropagation();
 		});
 
 		$("#reply").change(function(e) {
@@ -280,7 +279,12 @@ initReply: function() {
 		// If there's something in the reply textarea, show it.
 		if ($("#reply textarea").val()) $("#reply").trigger("change");
 
-		$(document).click(function(e) { ETConversation.hideReply(); });
+		var $reply = $("#reply");
+		$(document).click(function(e) {
+			if (!$reply.has(e.target).length) {
+				ETConversation.hideReply();
+			}
+		});
 
 	}
 
@@ -326,16 +330,17 @@ resetReply: function() {
 
 // Add a reply.
 addReply: function() {
-	var content = $("#reply textarea").val();
+	var data = $("#conversationReply form").serializeArray();
+	data.push({name: 'conversationId', value: ETConversation.id});
 
 	// Disable the reply/draft buttons.
 	$("#reply .postReply, #reply .saveDraft").disable();
 
 	// Make the ajax request.
-	$.ETAjax({
+	return $.ETAjax({
 		url: "conversation/reply.ajax/"+ETConversation.id,
 		type: "post",
-		data: {conversationId: ETConversation.id, content: content},
+		data: data,
 		success: function(data) {
 
 			// If there are messages, enable the reply/draft buttons and don't continue.
@@ -383,17 +388,15 @@ addReply: function() {
 startConversation: function(draft) {
 
 	// Prepare the conversation data.
-	var title = $("#conversationTitle input").val();
-	var content = $("#reply textarea").val();
-	var channel = $("#conversationHeader .channels :radio:checked").val();
+	var data = $("#conversationReply").closest("form").serializeArray();
+
 
 	// Disable the post reply and save draft buttons.
 	$("#reply .postReply, #reply .saveDraft").disable();
 
 	// Make the ajax request.
-	var data = {title: title, content: content, channel: channel};
 	if (draft) data.saveDraft = "1";
-	$.ETAjax({
+	return $.ETAjax({
 		url: "conversation/start.ajax",
 		type: "post",
 		data: data,
@@ -610,13 +613,13 @@ redisplayAvatars: function() {
 	// If they're the same, hide it.
 	var prevId = null;
 	$("#conversationPosts > li").each(function() {
-		if (prevId == $(this).find("div.post").data("memberid"))
-			$(this).find("div.avatar").hide();
+		var $post = $(this).find(".post:first")
+		var id = $post.data("memberid")
+		if (prevId == id)
+			$post.addClass('post-hide-avatar');
 		else
-			$(this).find("div.avatar").show();
-
-		prevId = $(this).find("div.post").data("memberid");
-
+			$post.removeClass('post-hide-avatar');
+		prevId = id;
 	});
 
 },
@@ -1131,7 +1134,7 @@ togglePreview: function(id, preview) {
 		$("#" + id + "-preview").html("");
 
 		// Get the formatted post and show it.
-		$.ETAjax({
+		return $.ETAjax({
 			url: "conversation/preview.ajax",
 			type: "post",
 			data: {content: $("#" + id + " textarea").val()},

@@ -17,12 +17,21 @@ $conversation = $data["conversation"];
 $body = $form->input("content", "textarea", array("cols" => "200", "rows" => "20", "tabindex" => 200))."
 	<div id='reply-preview' class='preview'></div>";
 
+
+$formButtonsBefore = array();
+$formButtonsAfter = array();
+$this->trigger("renderFormButtonsBefore", array(&$formButtonsBefore, $form, $conversation));
+$this->trigger("renderFormButtonsAfter", array(&$formButtonsAfter, $form, $conversation));
+
 $footer = "<div class='editButtons'>".
+	join('', $formButtonsBefore).
 	$form->button("postReply", !$conversation["conversationId"] ? T("Start Conversation") : T("Post a Reply"), array("class" => "big submit postReply", "tabindex" => 300)).
 	"<span class='draftButtons'>".
 	"<a href='".URL("conversation/discard/".$conversation["conversationId"]."?token=".ET::$session->token)."' class='button big discardDraft' title='".T("Discard")."'><i class='icon-trash'></i></a> ".
 	$form->button("saveDraft", T("Save Draft"), array("class" => "big saveDraft", "tabindex" => 400)).
-	"</span></div>";
+	"</span>".
+	join('', $formButtonsAfter).
+	"</div>";
 
 // Construct an array for use in the conversation/post view.
 $post = array(
