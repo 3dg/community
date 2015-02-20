@@ -26,6 +26,7 @@ addons/libraries/*
 !addons/skins/index.html
 
 !addons/languages/Chinese
+!addons/plugins/Captcha
 
 # Compiled source
 *.com
