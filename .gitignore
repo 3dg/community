@@ -27,6 +27,7 @@ addons/libraries/*
 
 !addons/languages/Chinese
 !addons/plugins/Captcha
+!addons/plugins/Upyun
 
 # Compiled source
 *.com
