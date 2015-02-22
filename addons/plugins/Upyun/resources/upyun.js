@@ -72,7 +72,7 @@ function upload(file, $target) {
   var deferred = getSign()
   .then(function (sign) {
     var data = new FormData
-    data.append('file', file)
+    data.append('file', file, file.name)
     data.append('policy', sign.policy)
     data.append('signature', sign.signature)
 
