@@ -28,6 +28,7 @@ class UpyunController extends ETController {
       'expiration' => time() + $expiration,
       'save-key' => '/{filemd5}{.suffix}',
       'content-length-range' => '1024,12582912', // 1K - 12M
+      'x-gmkerl-rotate' => 'auto',
     );
 
 
