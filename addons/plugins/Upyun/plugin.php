@@ -10,7 +10,9 @@ ET::$pluginInfo['Upyun'] = array(
   'authorEmail' => '',
   'authorURL' => '',
   'license' => 'MIT',
-  'priority' => 5, // after BBCode
+  'dependencies' => array(
+    'BBCode' => '0',
+  )
 );
 
 class ETPlugin_Upyun extends ETPlugin {
