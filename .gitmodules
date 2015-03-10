@@ -1,3 +1,6 @@
 [submodule "addons/plugins/Views"]
 	path = addons/plugins/Views
 	url = https://github.com/esotalk/Views.git
+[submodule "addons/plugins/StopForumSpam"]
+	path = addons/plugins/StopForumSpam
+	url = https://github.com/joshuaruesweg/esoTalk-SFS.git
