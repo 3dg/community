@@ -178,7 +178,7 @@ $definitions["Forum privacy"] = "社区信息";
 $definitions["Forum Settings"] = "社区设置";
 $definitions["Forum Statistics"] = "社区统计";
 $definitions["Forum title"] = "社区标题";
-$definitions["forumDescription"] = "%s is a web-forum discussing %s, and %s.";
+$definitions["forumDescription"] = "%s 是一个讨论 %s, 和 %s 的论坛。";
 
 $definitions["Give this group the 'moderate' permission on all existing channels"] = "给这个小组的所有成员“适当的”权限";
 $definitions["Global permissions"] = "全局权限";
