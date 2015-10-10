@@ -307,7 +307,7 @@ public function init()
 		}
 
 		$this->addToMenu("meta", "copyright",
-			"<a href='https://www.upyun.com/' target='_blank' rel='nofollow'><img src='http://upfiles.b0.upaiyun.com/logo/90x45.png' width='45' height='22' alt='UPYUN' style='vertical-align: middle;'></a> ".
+			"<a href='https://www.upyun.com/' target='_blank' rel='nofollow'><img src='//upfiles.b0.upaiyun.com/logo/90x45.png' width='45' height='22' alt='UPYUN' style='vertical-align: middle;'></a> ".
 			"<a href='https://github.com/3dg' target='_blank'>Source code on github</a>"
 		);
 
