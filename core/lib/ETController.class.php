@@ -702,7 +702,7 @@ public function addJSVar($key, $val)
  */
 public function addJSFile($file, $global = false)
 {
-	if (strpos($file, "://") !== false) $key = "remote";
+	if (strpos($file, "://") !== false || strpos($file, "//") === 0) $key = "remote";
 	$key = $global ? "global" : "local";
 	if (!in_array($file, $this->jsFiles[$key])) $this->jsFiles[$key][] = $file;
 }
@@ -719,7 +719,7 @@ public function addJSFile($file, $global = false)
  */
 public function addCSSFile($file, $global = false)
 {
-	if (strpos($file, "://") !== false) $key = "remote";
+	if (strpos($file, "://") !== false || strpos($file, "//") === 0) $key = "remote";
 	else $key = $global ? "global" : "local";
 	if (!in_array($file, $this->cssFiles[$key])) $this->cssFiles[$key][] = $file;
 }
