@@ -202,11 +202,7 @@ public function create($conversationId, $memberId, $content, $title = "")
 		"memberId" => $memberId,
 		"time" => time(),
 		"content" => $content,
-		"title" => $title,
-		"info" => var_export(array(
-			"_SERVER" => $_SERVER,
-			"_POST" => $_POST,
-		), true),
+		"title" => $title
 	);
 
 	$id = parent::create($data);

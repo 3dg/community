@@ -69,11 +69,6 @@ public function create(&$values)
 
 	if ($this->errorCount()) return false;
 
-	$values["info"] = var_export(array(
-		"_SERVER" => $_SERVER,
-		"_POST" => $_POST,
-	), true);
-
 	$memberId = parent::create($values);
 	$values["memberId"] = $memberId;
 
