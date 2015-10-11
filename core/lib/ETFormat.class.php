@@ -27,6 +27,9 @@ public $content = "";
 public $inline = false;
 
 
+private $siteHost = "";
+
+
 /**
  * Initialize the formatter with a content string on which all subsequent operations will be performed.
  *
@@ -36,6 +39,8 @@ public $inline = false;
  */
 public function init($content, $sanitize = true)
 {
+	$this->siteHost = parse_url(C("esoTalk.baseURL"))["host"];
+
 	// Clean up newline characters - make sure the only ones we are using are \n!
 	$content = strtr($content, array("\r\n" => "\n", "\r" => "\n")) . "\n";
 
@@ -234,12 +239,17 @@ public function linksCallback($matches)
 public function formatLink($url, $text = null)
 {
 	if ($text === null) $text = $url;
-	if (!preg_match("/^(\w+:\/\/)/", $url)) $url = "http://".$url;
+	// link without protocol (http, https, etc)
+	// or not protocol-relative links (//foo.com)
+	// or not relative links (/foo)
+	// defaults to http link
+	if (!preg_match("/^(\w+:\/\/|\/)/", $url)) $url = "http://$url";
+
+	$host = parse_url($url)["host"];
 
 	// If this is an internal link...
-	$baseURL = C("esoTalk.baseURL");
-	if (substr($url, 0, strlen($baseURL)) == $baseURL) {
-		return "<a href='".$url."' target='_blank' class='link-internal'>".$text."</a>";
+	if ( !isset($host) || $host === $this->siteHost ) {
+		return "<a href='$url' target='_blank' class='link-internal'>$text</a>";
 	}
 
 	// Otherwise, return an external HTML anchor tag.

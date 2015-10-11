@@ -105,10 +105,14 @@ public function handler_format_format($sender)
 
 	// Images: [img]url[/img]
 	$replacement = $sender->inline ? "[image]" : "<img src='$1' alt='-image-'/>";
-	$sender->content = preg_replace("/\[img\](https?.*?)\[\/img\]/i", $replacement, $sender->content);
+	// url can be
+	// - https http ftp etc
+	// - protocal relative url eg. //foo.com/pic.png
+	// - relative url eg. /sprite.png
+	$sender->content = preg_replace("/\[img\]((?:\w+:\/\/|\/).*?)\[\/img\]/i", $replacement, $sender->content);
 
 	// Links with display text: [url=http://url]text[/url]
-	$sender->content = preg_replace_callback("/\[url=(?!\s+)(\w{2,6}:\/\/)?([^\]]*?)\](.*?)\[\/url\]/i", array($this, "linksCallback"), $sender->content);
+	$sender->content = preg_replace_callback("/\[url=(?!\s+)(\w{2,6}:\/\/|\/\/)?([^\]]*?)\](.*?)\[\/url\]/i", array($this, "linksCallback"), $sender->content);
 
 	// Bold: [b]bold text[/b]
 	$sender->content = preg_replace("|\[b\](.*?)\[/b\]|si", "<b>$1</b>", $sender->content);
