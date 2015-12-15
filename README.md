@@ -18,3 +18,7 @@
 - weixin login(scan?)
 - dA account
 - pixiv account
+
+
+favicon
+svg logo

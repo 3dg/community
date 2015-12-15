@@ -854,6 +854,8 @@ public function head()
 	// Finally, append the custom HTML string constructed via $this->addToHead().
 	$head .= $this->head;
 
+	$head .= "<link rel='shortcut icon' href='/favicon.ico?v=2'>";
+
 	$this->trigger("head", array(&$head));
 
 	return $head;
