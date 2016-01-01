@@ -12,6 +12,6 @@ if ( getenv('OPENSHIFT_APP_NAME') ) {
 }
 
 // default off mention email
-$config["esoTalk.preferences.email.privateAdd"] = false;
+// $config["esoTalk.preferences.email.privateAdd"] = false;
 $config["esoTalk.preferences.email.post"] = false;
-$config["esoTalk.preferences.email.mention"] = false;
+// $config["esoTalk.preferences.email.mention"] = false;
