@@ -13,3 +13,5 @@ fi
 ln -sf ${OPENSHIFT_DATA_DIR}config ${OPENSHIFT_REPO_DIR}config
 ln -sf ${OPENSHIFT_DATA_DIR}cache ${OPENSHIFT_REPO_DIR}cache
 ln -sf ${OPENSHIFT_DATA_DIR}uploads ${OPENSHIFT_REPO_DIR}uploads
+
+cat ${OPENSHIFT_REPO_DIR}custom.css > ${OPENSHIFT_REPO_DIR}config/custom.css

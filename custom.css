@@ -1,0 +1,24 @@
+
+.channels > li + li > a {
+  margin: -1px;
+  color: #fff;
+  background-color: #08f;
+  border: 1px solid #08f;
+}
+.channels > li + li > a:hover {
+  color: #fff;
+  border-color: #19f;
+  background-color: #19f;
+}
+.channels > li + li.selected > a,
+.channels > li + li.selected > a:hover {
+  color: #08f;
+  border-color: #08f;
+  background-color: #fff;
+}
+.tabs .pathItem.selected a:before {
+  border-left-color: #08f;
+}
+.tabs .pathItem:not(.selected) a {
+  border-radius: 3px;
+}
