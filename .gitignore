@@ -27,6 +27,7 @@ addons/libraries/*
 
 !addons/languages/Chinese
 !addons/plugins/Captcha
+!addons/plugins/CaptchaQuestion
 !addons/plugins/Upyun
 !addons/plugins/Photoswipe
 
