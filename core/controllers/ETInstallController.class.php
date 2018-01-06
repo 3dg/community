@@ -190,7 +190,7 @@ public function action_install()
 		"esoTalk.emailFrom" => "do_not_reply@{$_SERVER["HTTP_HOST"]}",
 		"esoTalk.cookie.name" => preg_replace(array("/\s+/", "/[^\w]/"), array("_", ""), $info["forumTitle"]),
 		"esoTalk.urls.friendly" => !empty($info["friendlyURLs"]),
-		"esoTalk.urls.rewrite" => !empty($info["friendlyURLs"]) and function_exists("apache_get_modules") and in_array("mod_rewrite", apache_get_modules())
+		"esoTalk.urls.rewrite" => !empty($info["friendlyURLs"])
 	);
 
 	// Merge these new config settings into our current conifg variable.
