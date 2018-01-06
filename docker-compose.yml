@@ -1,0 +1,33 @@
+version: '3'
+# TODO volumes permission on boot2docker
+# https://github.com/docker-library/mysql/issues/99
+# https://github.com/moby/moby/issues/2259
+
+services:
+  db:
+    image: mariadb
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=app
+  app:
+    build: .
+    # image: php:fpm-alpine
+    # restart: always
+    # ports:
+    #   - "9000:9000"
+    volumes:
+      - .:/var/www/html
+      # - ./phpinfo.php:/var/www/html/index.php
+    # depends_on:
+    #   - db
+  web:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    volumes:
+        - ./app.conf:/etc/nginx/conf.d/app.conf
+        - .:/appstatic

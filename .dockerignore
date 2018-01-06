@@ -1,0 +1,15 @@
+cache
+config
+uploads
+
+Dockerfile
+README-esotalk.md
+README.md
+app.conf
+
+.git
+.gitignore
+.gitmodules
+.dockerignore
+.DS_Store
+.docker-compose.yml
