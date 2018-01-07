@@ -54,6 +54,7 @@ services:
       # or mount vhost on app and copy in?
       - /root/3dg/code:/appstatic:ro
       - /root/3dg/app/cache:/appstatic/cache:ro
+      - /root/3dg/app/config:/appstatic/config:ro
       - /root/3dg/app/uploads:/appstatic/uploads:ro
       - /root/3dg/code/app.conf:/etc/nginx/vhost.d/3dgundam.org_custom:ro
       - /root/3dg/code/nginx.tmpl:/app/nginx.tmpl
