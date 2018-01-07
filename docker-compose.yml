@@ -1,33 +1,74 @@
 version: '3'
-# TODO volumes permission on boot2docker
+
+# TODO dev: volumes permission on boot2docker
 # https://github.com/docker-library/mysql/issues/99
 # https://github.com/moby/moby/issues/2259
 
+volumes:
+  code: # TODO tmp code folder https://github.com/moby/moby/issues/32582
+  nginx-certs:
+  nginx-vhost:
+  nginx-html:
+
+
 services:
-  db:
-    image: mariadb
-    volumes:
-      - ./db:/var/lib/mysql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=app
+  # whoami:
+  #   image: jwilder/whoami
+  #   environment:
+  #     VIRTUAL_HOST: 3dgundam.org
+  #     LETSENCRYPT_HOST: 3dgundam.org
+  #     LETSENCRYPT_EMAIL: rhyzix@gmail.com
   app:
     build: .
     # image: php:fpm-alpine
-    # restart: always
-    # ports:
-    #   - "9000:9000"
+    environment:
+      VIRTUAL_HOST: 3dgundam.org
+      LETSENCRYPT_HOST: 3dgundam.org
+      LETSENCRYPT_EMAIL: rhyzix@gmail.com
     volumes:
-      - .:/var/www/html
-      # - ./phpinfo.php:/var/www/html/index.php
-    # depends_on:
-    #   - db
-  web:
-    image: nginx:alpine
+      - /root/3dg/code:/var/www/html
+      - /root/3dg/app/cache:/var/www/html/cache
+      - /root/3dg/app/config:/var/www/html/config
+      - /root/3dg/app/uploads:/var/www/html/uploads
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    volumes:
+      - /root/3dg/db:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=app
+
+  nginx:
+    image: jwilder/nginx-proxy:alpine
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-certs:/etc/nginx/certs:ro
+      - nginx-html:/usr/share/nginx/html:ro
+      # https://github.com/jwilder/nginx-proxy/blob/master/nginx.tmpl#L312
+      # or mount vhost on app and copy in?
+      - /root/3dg/code:/appstatic:ro
+      - /root/3dg/app/cache:/appstatic/cache:ro
+      - /root/3dg/app/uploads:/appstatic/uploads:ro
+      - /root/3dg/code/app.conf:/etc/nginx/vhost.d/3dgundam.org_custom:ro
+      - /root/3dg/code/nginx.tmpl:/app/nginx.tmpl
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
     depends_on:
       - app
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
     volumes:
-        - ./app.conf:/etc/nginx/conf.d/app.conf
-        - .:/appstatic
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-certs:/etc/nginx/certs
+      - nginx-html:/usr/share/nginx/html
+    depends_on:
+      - nginx
+

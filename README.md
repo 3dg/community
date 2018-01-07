@@ -7,8 +7,7 @@
   2. `git fetch upstream`
   3. `git merge --no-ff upstream/develop`
 - deploy code:
-  1. `git remote add deploy <deploy-path>`
-  2. `git push deploy master`
+  1. `env (dockerenv vm) docker-compose up --build -d`
 
 
 ## TODO

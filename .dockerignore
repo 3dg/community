@@ -5,11 +5,11 @@ uploads
 Dockerfile
 README-esotalk.md
 README.md
-app.conf
+# app.conf
 
 .git
 .gitignore
 .gitmodules
-.dockerignore
+# .dockerignore
 .DS_Store
-.docker-compose.yml
+*.yml
