@@ -1,4 +1,17 @@
-# 3DG
+# 3DGUNDAM Community
+
+
+## Development
+```
+docker-compose up --build
+```
+
+
+## Deploy
+```
+env (dockerenv productionvm) docker-compose up --build -d
+```
+
 
 ## Git
 - show 3dg changes: `git log original..`
@@ -6,8 +19,6 @@
   1. `git remote add upstream https://github.com/esotalk/esoTalk.git`
   2. `git fetch upstream`
   3. `git merge --no-ff upstream/develop`
-- deploy code:
-  1. `env (dockerenv vm) docker-compose up --build -d`
 
 
 ## TODO
