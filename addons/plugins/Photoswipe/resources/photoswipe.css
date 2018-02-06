@@ -1,14 +1,11 @@
-.link-external > img + i:not(.icon-external-link) {
-  display: none;
-}
-.link-external > img + i:not(.icon-external-link) + .icon-external-link {
+.link-external[data-photoswipe-index] i:not(.icon-external-link) {
   display: none;
 }
 
 .link-external[data-photoswipe-index] {
+  display: inline-block;
   position: relative;
 }
-
 .link-external[data-photoswipe-index] .icon-external-link {
   display: block;
   position: absolute;
@@ -18,6 +15,10 @@
   color: #fff;
   text-shadow: 0 0 2px #000;
   transition: opacity .5s;
+}
+
+.link-external[data-photoswipe-index] .icon-external-link:before {
+  content: "\f01d";
 }
 
 .link-external[data-photoswipe-index]:hover .icon-external-link {
