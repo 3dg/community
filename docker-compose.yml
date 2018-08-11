@@ -21,6 +21,7 @@ services:
   app:
     build: .
     # image: php:fpm-alpine
+    restart: always
     environment:
       VIRTUAL_HOST: 3dgundam.org
       LETSENCRYPT_HOST: 3dgundam.org
@@ -34,6 +35,7 @@ services:
       - db
   db:
     image: mariadb
+    restart: always
     volumes:
       - /root/3dg/db:/var/lib/mysql
     environment:
@@ -42,6 +44,7 @@ services:
 
   nginx:
     image: jwilder/nginx-proxy:alpine
+    restart: always
     ports:
       - 80:80
       - 443:443
