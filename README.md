@@ -9,7 +9,10 @@ docker-compose up --build
 
 ## Deploy
 ```
-env (dockerenv productionvm) docker-compose up --build -d
+rsync -azP . [host]:3dgundam
+ssh [host]
+cd 3dgundam
+docker-compose up --build -d
 ```
 
 
@@ -19,6 +22,12 @@ env (dockerenv productionvm) docker-compose up --build -d
   1. `git remote add upstream https://github.com/esotalk/esoTalk.git`
   2. `git fetch upstream`
   3. `git merge --no-ff upstream/develop`
+
+
+## Update images domain
+```sql
+UPDATE et_post SET content = REPLACE(content, '//rx-78.b0.upaiyun.com/', '//3dgundam.yizidesign.com/') WHERE INSTR(content, '//rx-78.b0.upaiyun.com/') > 0;
+```
 
 
 ## TODO
