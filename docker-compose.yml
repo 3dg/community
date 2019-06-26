@@ -27,17 +27,17 @@ services:
       LETSENCRYPT_HOST: 3dgundam.org
       LETSENCRYPT_EMAIL: rhyzix@gmail.com
     volumes:
-      - /root/3dg/code:/var/www/html
-      - /root/3dg/app/cache:/var/www/html/cache
-      - /root/3dg/app/config:/var/www/html/config
-      - /root/3dg/app/uploads:/var/www/html/uploads
+      - /srv/3dg/code:/var/www/html
+      - /srv/3dg/app/cache:/var/www/html/cache
+      - /srv/3dg/app/config:/var/www/html/config
+      - /srv/3dg/app/uploads:/var/www/html/uploads
     depends_on:
       - db
   db:
     image: mariadb
     restart: always
     volumes:
-      - /root/3dg/db:/var/lib/mysql
+      - /srv/3dg/db:/var/lib/mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=app
@@ -55,12 +55,12 @@ services:
       - nginx-html:/usr/share/nginx/html:ro
       # https://github.com/jwilder/nginx-proxy/blob/master/nginx.tmpl#L312
       # or mount vhost on app and copy in?
-      - /root/3dg/code:/appstatic:ro
-      - /root/3dg/app/cache:/appstatic/cache:ro
-      - /root/3dg/app/config:/appstatic/config:ro
-      - /root/3dg/app/uploads:/appstatic/uploads:ro
-      - /root/3dg/code/app.conf:/etc/nginx/vhost.d/3dgundam.org_custom:ro
-      - /root/3dg/code/nginx.tmpl:/app/nginx.tmpl
+      - /srv/3dg/code:/appstatic:ro
+      - /srv/3dg/app/cache:/appstatic/cache:ro
+      - /srv/3dg/app/config:/appstatic/config:ro
+      - /srv/3dg/app/uploads:/appstatic/uploads:ro
+      - /srv/3dg/code/app.conf:/etc/nginx/vhost.d/3dgundam.org_custom:ro
+      - /srv/3dg/code/nginx.tmpl:/app/nginx.tmpl
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
     depends_on:
