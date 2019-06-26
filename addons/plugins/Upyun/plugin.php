@@ -37,12 +37,14 @@ class ETPlugin_Upyun extends ETPlugin {
 
     $form->setValue('bucket', C('plugin.upyun.bucket'));
     $form->setValue('secret', C('plugin.upyun.secret'));
+    $form->setValue('endpoint', C('plugin.upyun.endpoint'));
     // $form->setValue('expiration', C('plugin.upyun.expiration'));
 
     if ($form->validPostBack('submit')) {
       $config = array();
       $config['plugin.upyun.bucket'] = $form->getValue('bucket');
       $config['plugin.upyun.secret'] = $form->getValue('secret');
+      $config['plugin.upyun.endpoint'] = $form->getValue('endpoint');
 
       if (!$form->errorCount()) {
         ET::writeConfig($config);

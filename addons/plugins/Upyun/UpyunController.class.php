@@ -20,6 +20,7 @@ class UpyunController extends ETController {
 
     $bucket = C('plugin.upyun.bucket');
     $secret = C('plugin.upyun.secret');
+    $endpoint = C('plugin.upyun.endpoint');
     $expiration = 86400; // 24h
 
     // TODO more configs
@@ -39,6 +40,7 @@ class UpyunController extends ETController {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(array(
       'bucket' => $bucket,
+      'endpoint' => $endpoint,
       'policy' => $policyBase64,
       'signature' => $signature,
     ));

@@ -14,6 +14,10 @@ $form = $data["form"];
     <label>Secret</label>
     <?php echo $form->input("secret", "text"); ?>
   </li>
+  <li>
+    <label>Endpoint</label>
+    <?php echo $form->input("endpoint", "text"); ?>
+  </li>
 </ul>
 </div>
 <div class='buttons'>

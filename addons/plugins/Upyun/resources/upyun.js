@@ -93,7 +93,7 @@ function upload(file, $target) {
       }
     })
     .then(function (res) {
-      return $.Deferred().resolve(res, sign.bucket)
+      return $.Deferred().resolve(res, sign.endpoint)
     })
   })
 
@@ -106,18 +106,18 @@ function upload(file, $target) {
   var result = ''
   ETConversation.wrapText($target, placeholder, '', '', '')
   deferred
-  .done(function (res, bucket) {
+  .done(function (res, endpoint) {
     var w = res['image-width']
     var h = res['image-height']
 
     if (w <= 300 && h <= 300) {
-      result = '[img]//' + bucket + '.b0.upaiyun.com' + res.url + '[/img]'
+      result = '[img]//' + endpoint + res.url + '[/img]'
     } else {
       // show thumb
-      result = '[url=//' + bucket + '.b0.upaiyun.com' + res.url + ']'
+      result = '[url=//' + endpoint + res.url + ']'
         // TODO thumb name setting
         // TODO https?
-        + '[img]//' + bucket + '.b0.upaiyun.com' + res.url + '!s[/img]'
+        + '[img]//' + endpoint + res.url + '!s[/img]'
         + '[i]' + w + 'x' + h + '[/i]'
         + '[/url]'
     }
